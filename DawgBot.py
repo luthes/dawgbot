@@ -8,7 +8,7 @@ from discord.ext import commands
 
 description = '''
 Thanks for checking out DawgBot! If you need any help with commands, type !help.
-For help with a sepcific command, type !command help.
+For help with a specific command, type !command help.
 '''
 
 # Get from file
