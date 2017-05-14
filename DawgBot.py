@@ -41,17 +41,13 @@ async def feature(*args):
         Syntax !feature (string)
     """ 
     featureCount = 0
-    print("Lines in Feature File: " + str(featureCount))
     featureFile = open('featureRequests.txt', 'r+')
     for i in featureFile.readlines():
-        print("feature lines:" + i)
         featureCount += 1
     for i in args:
-        print("Arguments: " + i)
         featureArgs = " ".join(args)
     featureString = str(featureCount) + " " +  str(time.strftime("%c")) \
 	 + " " + str(featureArgs) + " \n"
-    print("Complete Feature String: " + featureString)
     featureFile.write(featureString)
     featureFile.close()
 
@@ -69,7 +65,7 @@ async def bug(*args):
         bugArgs = " ".join(args)
     bugString = str(bugCount) + " " +  str(time.strftime("%c")) \
 	 + " " + str(bugArgs) + " \n"
-    bugFile.write(featureString)
+    bugFile.write(bugString)
     bugFile.close()
 
 # @bot.command()
