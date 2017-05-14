@@ -35,10 +35,11 @@ async def hello(member : discord.Member):
 
 @bot.command()
 async def feature(*args):
-    """ Feature Requests are held server side. Thanks for the input! 
-        File structure: (NUMBER)(DATE)(TIME) - Feature#: (string) \n
+    """ 
+    Feature Requests are held server side. Thanks for the input! 
+    File structure: (NUMBER)(DATE)(TIME) - Feature#: (string) \n
 
-        Syntax !feature (string)
+    Syntax !feature (string)
     """ 
     featureCount = 0
     featureFile = open('featureRequests.txt', 'r+')
@@ -50,12 +51,14 @@ async def feature(*args):
 	 + " " + str(featureArgs) + " \n"
     featureFile.write(featureString)
     featureFile.close()
+    await bot.say('Thanks for the feature request! My owner will look into it!')
 
 @bot.command()
 async def bug(*args):
-    """ Bug reports are held server side. Thanks for the help!
+    """ 
+    Bug reports are held server side. Thanks for the help!
 
-        Syntax !bug (string)
+    Syntax !bug (string)
     """ 
     bugCount = 0
     bugFile = open('bugReport.txt', 'r+')
@@ -67,6 +70,7 @@ async def bug(*args):
 	 + " " + str(bugArgs) + " \n"
     bugFile.write(bugString)
     bugFile.close()
+    await bot.say('Thanks for the bug report! My owner will look into it!')
 
 # @bot.command()
 # async def google(args):
