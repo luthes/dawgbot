@@ -11,7 +11,7 @@ startup_extensions = [
     "cogs.Feedback.bug",
     "cogs.Feedback.source",
     "cogs.Games.owpatch",
-    "cogs.Audio.audio"
+    "cogs.Media.youtube"
 ]
 
 # Global Variables

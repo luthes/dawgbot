@@ -3,7 +3,7 @@ import requests
 from bs4 import BeautifulSoup as BS
 from discord.ext import commands
 
-class YouTube():
+class Media():
     def __init__(self, bot):
         self.bot = bot
 
@@ -27,4 +27,4 @@ class YouTube():
                 return await self.bot.say(yt+href)
 
 def setup(bot):
-    bot.add_cog(YouTube(bot))
+    bot.add_cog(Media(bot))
