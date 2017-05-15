@@ -1,3 +1,1 @@
-
-# Bug List # Count | Date | Bug String
-2 Sat May 13 20:28:52 2017 test 
+0 Sun May 14 20:45:56 2017 this is a b ug 

@@ -1,0 +1,8 @@
+# Bug List
+# Count | Date | Bug String
+2 Sat May 13 20:26:58 2017 test 
+3 Sat May 13 20:27:01 2017 test 
+4 Sat May 13 20:29:37 2017 You should include Twitch stream links. 
+5 Sun May 14 10:32:29 2017 auto update the pin with new help 
+6 Sun May 14 17:07:43 2017 testing feature requests for wife 
+7 Sun May 14 18:22:29 2017 Fix the file structure so that commands are organized by command type. 
