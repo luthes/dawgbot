@@ -16,7 +16,7 @@ class OverWatch():
         Syntax: !owpatch
         """
         url="https://playoverwatch.com/en-us/game/patch-notes/pc/"
-        await self.bot.say('While we\'re working on parsing the patch notes, here\'s a url: ' + url)
+        await selfbot.say('Patch notes are too long for Discord, but you can find them here: ' + url)
 
 def setup(bot):
     bot.add_cog(OverWatch(bot))

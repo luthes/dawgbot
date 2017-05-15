@@ -6,21 +6,27 @@ import discord
 from discord.ext import commands
 import logging
 
+#TODO: Dynamically create this from .py files in cogs directory
 startup_extensions = [
     "cogs.Feedback.feature",
     "cogs.Feedback.bug",
     "cogs.Feedback.source",
     "cogs.Games.owpatch",
-    "cogs.Media.youtube"
+    "cogs.Media.youtube",
+    "cogs.Toys.coin",
+    "cogs.Toys.roll"
 ]
 
 # Global Variables
 DESCRIPTION= '''
-Thanks for checking out DawgBot! If you need any help with commands, type !help.
+Thanks for checking out DawgBot! Using this project to learn some more advanced
+python uses, and create something useful for the Discord server. If you need 
+any help with commands, type !help.
+
 For help with a specific command, type !command help. 
 
-Send any feature requests to zer0, or write them yourself and submit a pull 
-request on GitHub (use !source).
+Send any feature requests to zer0 using the !feature, or write them yourself 
+and submit a pull request on GitHub (use !source).
 '''
 
 # Get key from file
