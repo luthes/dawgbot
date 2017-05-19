@@ -7,17 +7,22 @@ class Toys():
         self.bot = bot
 
     @commands.command()
-    async def coin(self):
+    async def coin(self, flips=1):
         """ 
-        Flip a coin!
+        Flip a coin! Defaults to one flip, add number to flip multiple times, with
+        a maximum of 5 flips.
  
-        Syntax: !owpatch
+        Syntax: !coin, !coin 5
         """
-        flip = random.randint(1,2) 
-        if flip == 1:
-            await self.bot.say(':tracer:')
+        if flips > 5:
+            await self.bot.say('Input too large.')
         else:
-            await self.bot.say(':widow:')
+            for i in range(0,flips):
+                flip = random.randint(1,2) 
+                if flip == 1:
+                    await self.bot.say('<:tracer:311966007746887683>')
+                else:
+                    await self.bot.say('<:widow:311966007935762432>')
 
 def setup(bot):
     bot.add_cog(Toys(bot))

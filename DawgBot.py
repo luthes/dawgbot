@@ -13,6 +13,7 @@ startup_extensions = [
     "cogs.Feedback.source",
     "cogs.Games.owpatch",
     "cogs.Media.youtube",
+    "cogs.Media.playlist",
     "cogs.Toys.coin",
     "cogs.Toys.roll"
 ]
@@ -37,10 +38,9 @@ client = discord.Client()
 
 # Error and Info Logging
 # Valid options are typical, debug warn info notset for no logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger('DawgBot')
-logger.setLevel(logging.DEBUG)
-handler = logging.FileHandler(filename='files.DawgBot.log', encoding='utf-8', mode='w')
+logger = logging.getLogger('discord')
+logger.setLevel(logging.INFO)
+handler = logging.FileHandler(filename='DawgBot.log', encoding='utf-8', mode='w')
 handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
 logger.addHandler(handler)
 
@@ -104,16 +104,3 @@ if __name__ == "__main__":
             exc = '{}: {}'.format(type(e).__name__, e)
             print('Failed to load extension {}\n{}'.format(extension, exc))
     bot.run(key)
-
-
-
-
-
-
-
-
-
-
-
-
-
