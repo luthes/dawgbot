@@ -39,7 +39,7 @@ client = discord.Client()
 # Error and Info Logging
 # Valid options are typical, debug warn info notset for no logging
 logger = logging.getLogger('discord')
-logger.setLevel(logging.INFO)
+logger.setLevel(logging.DEBUG)
 handler = logging.FileHandler(filename='DawgBot.log', encoding='utf-8', mode='w')
 handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
 logger.addHandler(handler)
@@ -75,6 +75,7 @@ class General:
         """
         await bot.say('{0.name} joined in {0.joined_at}'.format(member))
     
+# These don't even work...
 class Reactions:
     @client.event
     async def on_message(message):
