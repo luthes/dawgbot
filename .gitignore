@@ -1,6 +1,5 @@
-# Don't upload Reports/Logs
-featureRequests.txt
-bugReport.txt
+# Don't upload text files
+*.txt
 
 #Vim Swap files
 *.swp

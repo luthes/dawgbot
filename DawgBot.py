@@ -8,8 +8,7 @@ import logging
 
 #TODO: Dynamically create this from .py files in cogs directory
 startup_extensions = [
-    "cogs.Feedback.feature",
-    "cogs.Feedback.bug",
+    "cogs.Feedback.feedback",
     "cogs.Feedback.source",
     "cogs.Games.owpatch",
     "cogs.Media.youtube",
