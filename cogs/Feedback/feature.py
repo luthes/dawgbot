@@ -17,15 +17,15 @@ class Feedback():
         Syntax !feature (string)
         """ 
         featureCount = 0
-        featureFile = open('featureRequests.txt', 'r+')
-        for i in featureFile.readlines():
-            featureCount += 1
-        for i in args:
-            featureArgs = " ".join(args)
-        featureString = str(featureCount) + " " +  str(time.strftime("%c")) \
-    	 + " " + str(featureArgs) + " \n"
-        featureFile.write(featureString)
-        featureFile.close()
+        with open("/home/steven/bots/dawgbot/cogs/files/DawgFeedback.txt","r+") \
+        as f:
+            for i in f.readlines():
+                featureCount += 1
+            for i in args:
+                featureArgs = " ".join(args)
+            featureString = str(featureCount) + " " +  str(time.strftime("%c")) \
+    	     + " " + str(featureArgs) + " \n"
+            f.write("[F] " + featureString)
         await self.bot.say('Thanks for the feature request! We will look into it!')
 
 def setup(bot):

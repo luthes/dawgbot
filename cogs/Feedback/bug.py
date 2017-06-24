@@ -16,15 +16,15 @@ class Feedback():
         Syntax !bug (string)
         """ 
         bugCount = 0
-        bugFile = open('bugReport.txt', 'r+')
-        for i in bugFile.readlines():
-            bugCount += 1
-        for i in args:
-            bugArgs = " ".join(args)
-        bugString = str(bugCount) + " " +  str(time.strftime("%c")) \
-    	 + " " + str(bugArgs) + " \n"
-        bugFile.write(bugString)
-        bugFile.close()
+        with open("/home/steven/bots/dawgbot/cogs/files/DawgFeedback.txt","r+") \
+        as f:
+            for i in f.readlines():
+                bugCount += 1
+            for i in args:
+                bugArgs = " ".join(args)
+            bugString = str(bugCount) + " " +  str(time.strftime("%c")) \
+    	     + " " + str(bugArgs) + " \n"
+            f.write("[B] " + bugString)
         await self.bot.say('Thanks for the bug report! We will work on getting it fixed!')
 
 def setup(bot):

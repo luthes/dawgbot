@@ -1,0 +1,6 @@
+[F]0 Fri Jun 23 21:48:14 2017 test 
+[F]1 Fri Jun 23 21:48:18 2017 test 
+[B] 2 Fri Jun 23 21:57:42 2017 testbug 
+[B] 3 Fri Jun 23 21:57:47 2017 test bug 
+[B] 4 Fri Jun 23 21:57:51 2017 testbut 
+[F] 5 Fri Jun 23 21:57:56 2017 test feature 
