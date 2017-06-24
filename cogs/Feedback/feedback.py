@@ -57,11 +57,10 @@ class Feedback():
         Feedback.make_issue(self, featureArgs, body=featureString, assignee=None, \
                 milestone=None, labels=["Bot Created Issues"])
 
-        await self.bot.say("""
-            Thanks for the feedback {0}, we appreciate it. You can view any 
-            developer comments as well as the status of this issue at the following url: 
-            {1}
-            """
-            .format(author.mention, Feedback.issue_url))
+        await self.bot.say("Thanks for the feedback {0}, "
+                           "we appreciate it. You can view any "
+                           "developer comments as well as the status of this "
+                           "issue at the following url:\n" 
+                           "{1}".format(author.mention, Feedback.issue_url))
 def setup(bot):
     bot.add_cog(Feedback(bot))
