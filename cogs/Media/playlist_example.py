@@ -56,7 +56,7 @@ class VoiceState:
         while True:
             self.play_next_song.clear()
             self.current = await self.songs.get()
-            await self.bot.send_message(discord.Object(id='314395037930749953'), 'Now playing ' + str(self.current))
+            await self.bot.send_message(self.current.channel, 'Now playing ' + str(self.current))
             self.current.player.start()
             await self.play_next_song.wait()
 
@@ -74,6 +74,7 @@ class Music:
         if state is None:
             state = VoiceState(self.bot)
             self.voice_states[server.id] = state
+
         return state
 
     async def create_voice_client(self, channel):
@@ -90,29 +91,24 @@ class Music:
             except:
                 pass
 
-#TODO: This command should be combined with summon so that !join summons the bot
-# if it's not already in a channel.
-
     @commands.command(pass_context=True, no_pm=True)
     async def join(self, ctx, *, channel : discord.Channel):
         """Joins a voice channel."""
         try:
             await self.create_voice_client(channel)
         except discord.ClientException:
-            await self.bot.send_message(discord.Object(id='314395037930749953'), 'Already in a voice channel...')
+            await self.bot.say('Already in a voice channel...')
         except discord.InvalidArgument:
-            await self.bot.send_message(discord.Object(id='314395037930749953'), 'This is not a voice channel...')
-        except discord.MissingRequiredArgument:
-            await self.bot.send_message(discord.Object(id='314395037930749953'), 'You must specify a channel...')
+            await self.bot.say('This is not a voice channel...')
         else:
-            await self.bot.send_message(discord.Object(id='314395037930749953'), 'Ready to play audio in ' + channel.name)
+            await self.bot.say('Ready to play audio in ' + channel.name)
 
     @commands.command(pass_context=True, no_pm=True)
     async def summon(self, ctx):
         """Summons the bot to join your voice channel."""
         summoned_channel = ctx.message.author.voice_channel
         if summoned_channel is None:
-            await self.bot.send_message(discord.Object(id='314395037930749953'), 'You are not in a voice channel.')
+            await self.bot.say('You are not in a voice channel.')
             return False
 
         state = self.get_voice_state(ctx.message.server)
@@ -141,8 +137,7 @@ class Music:
         }
 
         if state.voice is None:
-            success = await ctx.bit.join_voice_channel(id='314395185079648266')
-            # success = await ctx.invoke(self.summon)
+            success = await ctx.invoke(self.summon)
             if not success:
                 return
 
@@ -152,9 +147,9 @@ class Music:
             fmt = 'An error occurred while processing this request: ```py\n{}: {}\n```'
             await self.bot.send_message(ctx.message.channel, fmt.format(type(e).__name__, e))
         else:
-            player.volume = 0.2
+            player.volume = 0.6
             entry = VoiceEntry(ctx.message, player)
-            await self.bot.send_message(discord.Object(id='314395037930749953'), 'Enqueued ' + str(entry))
+            await self.bot.say('Enqueued ' + str(entry))
             await state.songs.put(entry)
 
     @commands.command(pass_context=True, no_pm=True)
@@ -165,7 +160,7 @@ class Music:
         if state.is_playing():
             player = state.player
             player.volume = value / 100
-            await self.bot.send_message(discord.Object(id='314395037930749953'), 'Set the volume to {:.0%}'.format(player.volume))
+            await self.bot.say('Set the volume to {:.0%}'.format(player.volume))
 
     @commands.command(pass_context=True, no_pm=True)
     async def pause(self, ctx):
@@ -212,23 +207,23 @@ class Music:
 
         state = self.get_voice_state(ctx.message.server)
         if not state.is_playing():
-            await self.bot.send_message(discord.Object(id='314395037930749953'), 'Not playing any music right now...')
+            await self.bot.say('Not playing any music right now...')
             return
 
         voter = ctx.message.author
         if voter == state.current.requester:
-            await self.bot.send_message(discord.Object(id='314395037930749953'), 'Requester requested skipping song...')
+            await self.bot.say('Requester requested skipping song...')
             state.skip()
         elif voter.id not in state.skip_votes:
             state.skip_votes.add(voter.id)
             total_votes = len(state.skip_votes)
             if total_votes >= 3:
-                await self.bot.send_message(discord.Object(id='314395037930749953'), 'Skip vote passed, skipping song...')
+                await self.bot.say('Skip vote passed, skipping song...')
                 state.skip()
             else:
-                await self.bot.send_message(discord.Object(id='314395037930749953'), 'Skip vote added, currently at [{}/3]'.format(total_votes))
+                await self.bot.say('Skip vote added, currently at [{}/3]'.format(total_votes))
         else:
-            await self.bot.send_message(discord.Object(id='314395037930749953'), 'You have already voted to skip this song.')
+            await self.bot.say('You have already voted to skip this song.')
 
     @commands.command(pass_context=True, no_pm=True)
     async def playing(self, ctx):
@@ -236,10 +231,16 @@ class Music:
 
         state = self.get_voice_state(ctx.message.server)
         if state.current is None:
-            await self.bot.send_message(discord.Object(id='314395037930749953'), 'Not playing anything.')
+            await self.bot.say('Not playing anything.')
         else:
             skip_count = len(state.skip_votes)
-            await self.bot.send_message(discord.Object(id='314395037930749953'), 'Now playing {} [skips: {}/3]'.format(state.current, skip_count))
+            await self.bot.say('Now playing {} [skips: {}/3]'.format(state.current, skip_count))
 
-def setup(bot):
-    bot.add_cog(Music(bot))
+bot = commands.Bot(command_prefix=commands.when_mentioned_or('$'), description='A playlist example for discord.py')
+bot.add_cog(Music(bot))
+
+@bot.event
+async def on_ready():
+    print('Logged in as:\n{0} (ID: {0.id})'.format(bot.user))
+
+bot.run('token')
