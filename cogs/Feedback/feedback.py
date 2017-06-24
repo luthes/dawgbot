@@ -10,11 +10,6 @@ class Feedback():
         self.bot = bot
         issue_url = ''
 
-    # Globals for GitHub Access
-    with open('./cogs/Feedback/accInfo.txt', 'r') as f:
-        user = f.readline().strip()
-        passw = f.readline().strip()
-
     def make_issue(self, title, body=None, assignee=None, milestone=None, labels=None):
         #Read Github Info from file
         owner = 'luthes'
@@ -51,19 +46,17 @@ class Feedback():
         """ 
         author = ctx.message.author
         featureCount = 0
-        with open("/home/steven/bots/dawgbot/cogs/files/DawgFeedback.txt","r+") \
-            as f:
-            for i in f.readlines():
-                featureCount += 1
-            for i in args:
-                featureArgs = " ".join(args)
-            featureString = """
-            Feedback Author: {0}\n 
-            Date and Time: {1}\n 
-            User Input: {2}\n
-            """.format(str(author), str(time.strftime("%c")), str(featureArgs))
+        for i in args:
+            featureArgs = " ".join(args)
+        featureString = """
+        Feedback Author: {0}\n 
+        Date and Time: {1}\n 
+        User Input: {2}\n
+        """.format(str(author), str(time.strftime("%c")), str(featureArgs))
+
         Feedback.make_issue(self, featureArgs, body=featureString, assignee=None, \
                 milestone=None, labels=["Bot Created Issues"])
+
         await self.bot.say("""
             Thanks for the feedback {0}, we appreciate it. You can view any 
             developer comments as well as the status of this issue at the following url: 
